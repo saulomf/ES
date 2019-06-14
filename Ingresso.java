@@ -14,6 +14,18 @@ public class Ingresso {
         this.Quantidade = quantidade;
     }
 
+
+    protected int getIngressoCodigo(){
+           return Codigo;
+    }
+    protected float getIngressoPreco(){
+           return Preco;
+    }
+    protected int getIngressoQuantidade(){
+           return Quantidade;
+    }
+
+
     public bool ValidaIngresso(int quantidade, float preco){
         if(( quantidade > 0) || (preco > 0)){
             return true;

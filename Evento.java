@@ -1,12 +1,11 @@
 
-public class Evento {
+public class Evento extends Data{
     private int Codigo;
     private String Nome;
     private String Local;
     private String Classe;
     private int Idade;
     private Apresentacao Apresentacoes;
-    private String Data;
     private int Duracao;
 
     //Usuario(){}
@@ -28,11 +27,34 @@ public class Evento {
     public SetApresentacoes(Apresentacao apresentacao){
         this.Apresentacoes = apresentacao;
     }
-    public SetData(String data){
-        this.Data = data;
-    }
     public SetDuracao(int duracao){
         this.Duracao = duracao;
+    }
+
+
+    protected int getEventoCodigo(){
+           return Codigo;
+    }
+    protected String getEventoNome(){
+           return Nome;
+    }
+    protected String getEventoLocal(){
+           return Local;
+    }
+    protected String getEventoClasse(){
+           return Classe;
+    }
+    protected int getEventoIdade(){
+           return Idade;
+    }
+    /*protected String getEvento(){
+           return ;
+    }*/
+    protected int getEventoDuracao(){
+           return Duracao;
+    }
+    protected String getEventoData(){
+           return Data;
     }
 
 
@@ -58,27 +80,6 @@ public class Evento {
         return false;
     }
 
-    public bool ValidaData (int dia, int mes, int ano){
-        if((dia > 31) || (dia < 1)){
-            return false;
-        }
-        if((mes > 12) || (mes < 1)){
-            return false;
-        }
-        if(ano < 2019){
-            return false;
-        }
-        return true;
-    }
-    public String MontaData(int dia, int mes, int ano){
-        String data = null;
-        String d, m, a;
-        d = Integer.toString(dia);
-        m = Integer.toString(mes);
-        a = Integer.toString(ano);
-        data = d + m + a;
-        return data;
-    }
 
     public bool Cadastrar(){}
     public bool Apagar(int codigo){}

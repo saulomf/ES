@@ -17,6 +17,21 @@ public class Usuario {
         this.cartaoCred = cartao;
     }
 
+
+    protected String getUsuarioNome(){
+           return Nome;
+    }
+    protected String getUsuarioCPF(){
+           return CPF;
+    }
+    protected String getUsuarioSenha(){
+           return Senha;
+    }
+    protected Cartao getUsuarioCartao(){
+           return cartaoCred;
+    }
+
+
     public bool ValidaNome(String nome){
         if (nome.length() > 50){
             return false;
