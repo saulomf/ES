@@ -2,6 +2,7 @@ package main;
 import java.util.*;
 
 public class Evento {
+    private String DonoCPF;
     private int Codigo;
     private String Nome;
     private String Cidade;
@@ -13,6 +14,10 @@ public class Evento {
     private int Duracao;
 
     //Usuario(){}
+
+    public void SetDonoCPF(String cpf){
+        this.DonoCPF = cpf;
+    }
     public void SetCodigo(int codigo){
         this.Codigo = codigo;
     }
@@ -39,6 +44,9 @@ public class Evento {
     }
 
 
+    protected String getEventoCPF(){
+           return DonoCPF;
+    }
     protected int getEventoCodigo(){
            return Codigo;
     }

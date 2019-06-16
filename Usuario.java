@@ -72,6 +72,7 @@ public class Usuario {
 
         Apresentacao apresentacao = new Apresentacao();
         Evento evento = new Evento();
+        evento.SetDonoCPF(CPF);
 
         String nome, local, classe;
         int dia, mes, ano, codigo, idade, sala, horario, duracao, quantidade, preco;

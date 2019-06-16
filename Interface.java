@@ -69,13 +69,14 @@ class Interface{
         lista_usuarios.add(usuario);
         System.out.println("Usuario cadastrado com sucesso");
         ler.nextLine();
+        ler.nextLine();
     }
 
 
     public void Buscar_Evento(boolean logado){
         System.out.println("Buscar Evento");
         String dataI, dataT, cidade, sigla;
-        int i, quantidade, j;
+        int i, quantidade, j, encontrou=0;
         ler.nextLine();
 
         System.out.println("Digite a data de inicio (aceitos: x.xx.xxxx ou xx.x.xxxx ou xx.xx.xxxx)");
@@ -92,6 +93,7 @@ class Interface{
                 if(((dataT.equals(apr.getApresentacaoData())) || (dataI.equals(apr.getApresentacaoData()))
                 || (cidade.equals(lista_eventos.get(i).getEventoCidade()))
                 || (cidade.equals(lista_eventos.get(i).getEventoSigla())))){
+                    encontrou = 1;
                     lista_eventos.get(i).mostraEvento();
                     ler.nextLine();
                     if(logado == true){
@@ -99,6 +101,10 @@ class Interface{
                         if(ler.nextInt()==1){
                             System.out.println("Quantos Ingressos?");
                             quantidade = ler.nextInt();
+                            while(quantidade > apr.getIngressoQuantidade()){
+                                System.out.println("Quantidade indisponivel de Ingressos, digite outra");
+                                quantidade = ler.nextInt();
+                            }
                             System.out.println("O codigo dos Ingressos e:");
                             for(j=1; j<=quantidade; j++){
                                 System.out.println(apr.getIngressoQuantidade()-j);
@@ -106,24 +112,34 @@ class Interface{
                             apr.SetQuantidade(apr.getIngressoQuantidade()-quantidade);
                             System.out.println("Quantidade atual de Ingressos: " + apr.getIngressoQuantidade());
                             ler.nextLine();
+                            ler.nextLine();
                         }
                     }
                 }
             }
+        }
+        if(encontrou == 0){
+            System.out.println("Evento nao existente");
+            ler.nextLine();
         }
 
 
     }
 
 
-    public void Editar_Evento(int user){
+    public void Editar_Evento(int user, String cpf_log){
         int codigo, i, continua=0;
 
         System.out.println("Digite o Codigo do evento que deseja editar:");
         codigo = ler.nextInt();
         for(i=0; i < lista_eventos.size(); i++){
             if(codigo == lista_eventos.get(i).getEventoCodigo()){
-                continua = 1;
+                if(cpf_log.equals(lista_eventos.get(i).getEventoCPF())){
+                    continua = 1;
+                }
+                else{
+                    System.out.println("Este evento nao foi cadastrado por voce");
+                }
                 break;
             }
         }
@@ -134,9 +150,38 @@ class Interface{
                 lista_eventos.remove(i);
                 lista_eventos.add(i, lista_usuarios.get(user).CadastrarEvento());
                 System.out.println("Evento editado com sucesso");
-                ler.nextLine();
             }
         }
+        ler.nextLine();
+
+    }
+
+
+    public void Apagar_Evento(String cpf_log){
+        int codigo, i, continua=0;
+
+        System.out.println("Digite o Codigo do evento que deseja apagar:");
+        codigo = ler.nextInt();
+        for(i=0; i < lista_eventos.size(); i++){
+            if(codigo == lista_eventos.get(i).getEventoCodigo()){
+                if(cpf_log.equals(lista_eventos.get(i).getEventoCPF())){
+                    continua = 1;
+                }
+                else{
+                    System.out.println("Este evento nao foi cadastrado por voce");
+                }
+                break;
+            }
+        }
+        if(continua == 1){
+            lista_eventos.get(i).mostraEvento();
+            System.out.println("Deseja mesmo apagar:(1-Sim; 2-Nao)");
+            if(ler.nextInt()==1){
+                lista_eventos.remove(i);
+                System.out.println("Evento apagado com sucesso");
+            }
+        }
+        ler.nextLine();
 
     }
 
@@ -160,7 +205,8 @@ class Interface{
                 System.out.println("1 - Cadastrar Evento");
                 System.out.println("2 - Buscar Evento");
                 System.out.println("3 - Editar Evento");
-                System.out.println("4 - sair");
+                System.out.println("4 - Apagar Evento");
+                System.out.println("5 - sair");
                 opcao = ler.nextInt();
                 limparTela();
                 switch(opcao){
@@ -175,7 +221,11 @@ class Interface{
                         break;
 
                     case 3:
-                        Editar_Evento(i);
+                        Editar_Evento(i, cpf);
+                        break;
+
+                    case 4:
+                        Apagar_Evento(cpf);
                         break;
                 }
 
