@@ -185,6 +185,33 @@ class Interface{
 
     }
 
+
+    public void Apagar_Conta(){
+        int i, continua=0;
+        String codigo;
+        ler.nextLine();
+        System.out.println("Digite o CPF de sua conta:");
+        codigo = ler.nextLine();
+        for(i=0; i < lista_usuarios.size(); i++){
+            if(codigo.equals(lista_usuarios.get(i).getUsuarioCPF())){
+                continua = 1;
+                break;
+            }
+        }
+        if(continua == 1){
+            System.out.println("Deseja mesmo apagar:(1-Sim; 2-Nao)");
+            if(ler.nextInt()==1){
+                lista_usuarios.remove(i);
+                System.out.println("Conta apagada com sucesso");
+            }
+        }
+        else{
+            System.out.println("CPF nao existente");
+        }
+        ler.nextLine();
+
+    }
+
     public void LogarUsuario(){
         String cpf, senha;
         int i=0, continua=0, opcao;
@@ -206,7 +233,8 @@ class Interface{
                 System.out.println("2 - Buscar Evento");
                 System.out.println("3 - Editar Evento");
                 System.out.println("4 - Apagar Evento");
-                System.out.println("5 - sair");
+                System.out.println("5 - Apagar Conta");
+                System.out.println("6 - sair");
                 opcao = ler.nextInt();
                 limparTela();
                 switch(opcao){
@@ -226,6 +254,10 @@ class Interface{
 
                     case 4:
                         Apagar_Evento(cpf);
+                        break;
+
+                    case 5:
+                        Apagar_Conta();
                         break;
                 }
 
