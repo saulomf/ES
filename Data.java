@@ -1,7 +1,10 @@
+package main;
+import java.util.*;
+
 public class Data {
     public String Data;
 
-    public bool ValidaData (int dia, int mes, int ano){
+    public boolean ValidaData (int dia, int mes, int ano){
         if((dia > 31) || (dia < 1)){
             return false;
         }
@@ -14,13 +17,13 @@ public class Data {
         return true;
     }
 
-    public String SetData(int dia, int mes, int ano){
+    public void SetData(int dia, int mes, int ano){
         String data = null;
         String d, m, a;
         d = Integer.toString(dia);
         m = Integer.toString(mes);
         a = Integer.toString(ano);
-        data = d + m + a;
+        data = d + "." + m + "." + a;
         this.Data = data;
     }
 }

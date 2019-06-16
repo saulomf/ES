@@ -1,16 +1,18 @@
+package main;
+
 public class Cartao extends Data{
-    private int Numero;
+    private String Numero;
     private int CVV;
 
-    public SetNumero(int numero){
+    public void SetNumero(String numero){
         this.Numero = numero;
     }
-    public SetCVV(int cvv){
+    public void SetCVV(int cvv){
         this.CVV = cvv;
     }
 
 
-    protected int getCartaoNumero(){
+    protected String getCartaoNumero(){
            return Numero;
     }
     protected int getCartaoCVV(){
@@ -21,15 +23,24 @@ public class Cartao extends Data{
     }
 
 
-    public bool ValidaNumero(int numero){
-        if((numero > 9999999999999999) || (numero < 1000000000000000)){
+    public boolean ValidaNumero(String numero){
+        int aux;
+        if (numero.length() != 16){
             return false;
         }
+        for (int i = 0; i < numero.length(); i++){
+            aux = (int)(numero.charAt(i));
+            if((aux < 48) && (aux > 57)){
+                return false;
+            }
+        }
+        return true;
     }
-    public bool ValidaCVV(int cvv){
+    public boolean ValidaCVV(int cvv){
         if((cvv > 999) || (cvv < 100)){
             return false;
         }
+        return true;
     }
 
 
